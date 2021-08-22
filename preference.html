@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Preference</title>
+    <link rel="stylesheet" href="elementui.css">
+    <style>
+        .time-picker > input {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <el-container>
+            <el-header>
+                <h1>Water Drink Reminder</h1>
+            </el-header>
+            <el-main>
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>Alarm List</span>
+                        <el-button-group style="float: right; padding: 3px 0">
+                            <el-button type="primary" size="mini" round @click="handleAdd()" :disabled="!canAdd">Add
+                                New
+                            </el-button>
+                            <el-button type="success" size="mini" round @click="handleSave()">Do Save</el-button>
+                        </el-button-group>
+                    </div>
+                    <el-table :data="data.data">
+                        <el-table-column label="#" type="index" width="40"
+                        ></el-table-column>
+                        <el-table-column label="Title" width="160">
+                            <span>喝水提醒</span>
+                        </el-table-column>
+                        <el-table-column label="Time" width="180">
+                            <template slot-scope="scope">
+                                <el-time-select
+                                        class="time-picker"
+                                        prefix-icon="el-icon-alarm-clock"
+                                        size="mini"
+                                        :editable="true"
+                                        placeholder="pick time"
+                                        :picker-options="{
+                                                start: '06:00',
+                                                step: '00:01',
+                                                end: '22:00',
+                                              }"
+                                        v-model="scope.row.time"
+                                ></el-time-select>
+                            </template>
+                        </el-table-column>
+                        <el-table-column label="Action">
+                            <template slot-scope="scope">
+                                <el-button
+                                        size="mini"
+                                        type="danger"
+                                        @click="handleDelete(scope.$index, scope.row)">Del
+                                </el-button>
+                            </template>
+                        </el-table-column>
+                    </el-table>
+                </el-card>
+            </el-main>
+        </el-container>
+    </div>
+</div>
+<script src="vue.js"></script>
+<script src="elementui.js"></script>
+<script>
+    const {ipcRenderer} = require('electron');
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            message: 'Hello Vue!',
+            data: {
+                version: 'v0.0.1',
+                data: [
+                    {
+                        'time': '11:00'
+                    }, {
+                        'time': '15:00'
+                    }
+                ]
+            }
+        },
+        methods: {
+            handleDelete(index, row) {
+                this.data.data.splice(index, 1);
+            },
+            handleAdd: function () {
+                this.data.data.push({
+                    'title': '喝水提醒',
+                    'time': ''
+                });
+            },
+            handleSave: function () {
+                ipcRenderer.send('saveAlarms', this.data);
+            },
+
+        },
+        computed: {
+            canAdd: function () {
+                return this.data.data.length < 4;
+            }
+        }
+    });
+</script>
+</body>
+</html>

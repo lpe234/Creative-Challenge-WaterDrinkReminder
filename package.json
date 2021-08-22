@@ -1,0 +1,36 @@
+{
+  "name": "water-drink-reminder-3",
+  "version": "0.0.1",
+  "description": "just drink more more water",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder -c.mac.identity=lpe234@qq.com",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lpe234 <lpe234@qq.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^13.2.1",
+    "electron-builder": "^22.11.7"
+  },
+  "build": {
+    "appId": "xyz.lpe234.wdr3",
+    "productName": "water drink reminder",
+    "directories": {
+      "output": "dist"
+    },
+    "mac": {
+      "icon": "icons/icon.icns",
+      "category": "xyz.lpe234.water",
+      "extendInfo": {
+        "LSUIElement": true
+      }
+    }
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "mqtt": "^4.2.8"
+  }
+}
