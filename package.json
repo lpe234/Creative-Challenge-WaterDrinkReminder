@@ -17,10 +17,19 @@
   },
   "build": {
     "appId": "xyz.lpe234.wdr3",
-    "productName": "water drink reminder",
+    "productName": "WaterDrinkReminder",
     "directories": {
       "output": "dist"
     },
+    "extraFiles": [
+      {
+        "from": "icons",
+        "to": "resources",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
     "mac": {
       "icon": "icons/icon.icns",
       "category": "xyz.lpe234.water",
