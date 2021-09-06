@@ -42,7 +42,7 @@ ipcMain.on('saveAlarms', (event, data) => {
 });
 
 function createTray() {
-    tray = new Tray(path.join(process.resourcesPath, 'cup@3x.png'));
+    tray = new Tray('icons/cup@3x.png');
     const contextMenu = Menu.buildFromTemplate([
         {role: 'about', label: 'About'},
         {label: 'Preferences...', type: 'normal', click: showPreferences},
