@@ -138,7 +138,7 @@ function getWindowPosition() {
 
 
 function doLogin() {
-    axios.get('https://lemon.lpe234.xyz/common/im/userid/',)
+    axios.get('https://xxx.xx.xx/common/im/userid/',)  // TODO: 用户名、密码(token)获取
         .then(function (response) {
             console.log(response.data);
             username = response.data.username;
@@ -159,11 +159,11 @@ let client = null,
 
 function connectMqtt() {
     const opts = {
-        'clientId': username + '@5js7g0',
+        'clientId': username + '@appId',  // TODO: AppId设置
         'username': username,
         'password': password
     };
-    client = mqtt.connect('mqtt://5js7g0.cn1.mqtt.chat', opts);
+    client = mqtt.connect('mqtt://xxx.mqtt.chat', opts);  // TODO: MQTT地址
     client.on('connect', function () {
         client.subscribe('world/water/' + opts.username, function (err) {
             if (!err) {

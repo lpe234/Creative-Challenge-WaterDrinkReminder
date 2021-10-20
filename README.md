@@ -10,6 +10,10 @@
 
 ### 运行
 
+需要去环信官网申请MQTT应用。[https://www.easemob.com/product/mqtt](https://www.easemob.com/product/mqtt)
+
+并在`main.js`中做相应设置，具体见代码`TODO:`注释描述。
+
 ```shell
 # 安装依赖
 npm install
